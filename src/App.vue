@@ -63,19 +63,14 @@ const logOrReg = ref(null);
     </div>
 
     <div v-if="store.getters.isAuthorized">
-      <div class="title">
-        Log out
-      </div>
-      <div>
-        <AuthLogout/>
-      </div>
+      <AuthLogout/>
     </div>
 
   </div>
 
 
   <div v-if="store.getters.isAuthorized">
-    <div class="title">/lk</div>
+    <h2>LK</h2>
     <div class="flex-container">
       <div>
         <LkProfile/>
@@ -94,7 +89,6 @@ const logOrReg = ref(null);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 .hello-world {
@@ -109,7 +103,7 @@ const logOrReg = ref(null);
   padding: .33em;
   border: 1px solid #ccc;
   border-radius: .72em;
-  padding: 0 .84em;
+  padding: 1em;
   margin: 0.33em;
 }
 

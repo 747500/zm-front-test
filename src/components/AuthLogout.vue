@@ -18,13 +18,14 @@ function logout() {
 
 </script>
 
-<template>
-  <pre class="raw">{{ store.getters.profile }}</pre>
+<template lang="pug">
+div
+  h3 Log out
+  br
+  pre(class="raw") {{ store.getters.profile }}
 
-  <div>
-    <button @click="logout">POST /auth/logout</button>
-  </div>
-
+  div
+    button(@click="logout") POST /auth/logout
 </template>
 
 <style scoped>

@@ -66,7 +66,7 @@ updateList();
 
 <template lang="pug">
 div
-  div(class="title") Delivery addresses
+  h3 Delivery addresses
   div
     form(@submit.prevent="createDeliveryAddress" class="address-list")
       label(for="add-delivery-address" style="text-align: center;") New
