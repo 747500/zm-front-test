@@ -1,0 +1,59 @@
+<script setup>
+import { ref } from 'vue';
+
+const lkPasswordDto = ref({
+  old: null,
+  new: null,
+});
+
+const passwordConfirm = ref('');
+
+function passwordUpdate() {
+  fetch('/api/auth/password', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(lkPasswordDto.value),
+  })
+  .then(async response => {
+    if (200 === response.status) {
+      profileData.value = await response.json();
+    }
+  });
+}
+
+
+</script>
+
+<template lang="pug">
+div
+  h3 Password
+
+  form(@submit.prevent="passwordUpdate")
+    label() current password
+    input(v-model="lkPasswordDto.old" @keyup="passwordCompare" type="password")
+
+    label() new password
+    input(v-model="lkPasswordDto.new" @keyup="passwordCompare" type="password")
+
+    label() new password (confirm)
+    input(v-model="passwordConfirm" @keyup="passwordCompare" type="password")
+
+    label() submit
+    button(type="submit" :disabled="lkPasswordDto.new !== passwordConfirm || passwordConfirm.length < 8") Update
+
+</template>
+
+<style scoped>
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.12em;
+  row-gap: 0.6em;
+  align-items: baseline;
+}
+
+</style>

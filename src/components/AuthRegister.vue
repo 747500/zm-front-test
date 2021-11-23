@@ -1,15 +1,32 @@
 <script setup>
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+
+const store = useStore();
 
 const authRegisterDto = ref({
-  email: '',
-  phone: '',
-  password: '',
+  email: null,
+  phone: null,
+  password: null,
 });
 
 function authRegisterSubmit(event) {
 
   console.log(event)
+
+  fetch('/api/auth/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(authRegisterDto.value),
+    credentials: 'include',
+  })
+  .then(response => {
+    if (201 === response.status) {
+      store.commit('login');
+    }
+  })
 
 }
 

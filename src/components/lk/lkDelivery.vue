@@ -67,14 +67,11 @@ updateList();
 <template lang="pug">
 div
   h3 Delivery addresses
-  div
-    form(@submit.prevent="createDeliveryAddress" class="address-list")
-      label(for="add-delivery-address" style="text-align: center;") New
-      input(id="add-delivery-address" v-model="newAddress")
-      button(type="submit") +
   div(class="address-list")
+    input(id="add-delivery-address" v-model="newAddress")
+    button(type="button" @click="createDeliveryAddress" ) +
+    span
     template(class="raw" v-for="item in addressList" :key="item.id")
-      input(type="text" readonly v-model="item.id" style="width: 1em; text-align: right;")
       input(v-model="item.address")/
       button(type="button" @click="updateDeliveryAddress(item.id)") S
       button(type="button" @click="deleteDeliveryAddress(item.id)") -
@@ -83,9 +80,9 @@ div
 <style scoped>
 .address-list {
   display: grid;
-  grid-template-columns: 1fr 10fr 1fr 1fr;
-  column-gap: 0.33em;
-  row-gap: 0.12em;
+  grid-template-columns: 10fr 1fr 1fr;
+  column-gap: 0.12em;
+  row-gap: 0.6em;
   align-items: baseline;
 }
 </style>

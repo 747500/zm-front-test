@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 
 const showRaw = ref(false);
+
 const profileData = ref({});
 
 function profileLoad() {
@@ -9,12 +10,11 @@ function profileLoad() {
     method: 'GET',
     credentials: 'include',
   })
-  .then(response => {
-    return response.json()
+  .then(async response => {
+    if (200 === response.status) {
+      profileData.value = await response.json();
+    }
   })
-  .then(data => {
-    profileData.value = data;
-  });
 }
 
 function profileUpdate() {
@@ -34,6 +34,21 @@ function profileUpdate() {
   });
 }
 
+const extAuth = ref({});
+
+//function listExtAuth() {
+  fetch('/api/lk/profile/ext-auth', {
+    method: 'GET',
+    credentials: 'include',
+  })
+  .then(response => {
+    return response.json();
+  })
+  .then(body => {
+    extAuth.value = body;
+  });
+//}
+
 profileLoad();
 
 </script>
@@ -46,12 +61,6 @@ div
     label() ID
     input(v-model="profileData.id" readonly)
 
-    label() registerProvider
-    input(v-model="profileData.registerProvider" readonly)
-
-    label() providerId
-    input(v-model="profileData.providerId" readonly)
-
     label() lastname
     input(v-model="profileData.lastname")
 
@@ -62,10 +71,10 @@ div
     input(v-model="profileData.surname")
 
     label() email
-    input(v-model="profileData.email" type="email" readonly)
+    input(v-model="profileData.email" type="email")
 
     label() phone
-    input(v-model="profileData.phone" type="phone" readonly)
+    input(v-model="profileData.phone" type="phone")
 
     label() birthday
     input(v-model="profileData.birthday" type="date")
@@ -81,6 +90,9 @@ div
 
     label() submit
     button(type="submit") Update
+
+  pre(class="raw") {{ extAuth }}
+
 </template>
 
 <style scoped>
@@ -88,18 +100,9 @@ div
 form {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  column-gap: 0.33em;
-  row-gap: 0.33em;
+  column-gap: 0.12em;
+  row-gap: 0.6em;
   align-items: baseline;
 }
 
-input {
-  border: 1px solid #555;
-  border-radius: 3px;
-}
-
-input[readonly] {
-  color: rgb(80, 71, 71);
-  border-width: 1px;
-}
 </style>

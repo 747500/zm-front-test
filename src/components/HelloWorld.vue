@@ -39,9 +39,6 @@ const count = ref(0)
 </template>
 
 <style scoped>
-a {
-  color: #0a4d41;
-}
 .hello-container {
   text-align: center;
 }

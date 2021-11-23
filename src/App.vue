@@ -2,7 +2,7 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
-import { ref } from 'vue'
+import { shallowRef } from 'vue'
 import { useStore } from 'vuex'
 
 import HelloWorld from './components/HelloWorld.vue'
@@ -11,6 +11,7 @@ import AuthLogin from './components/AuthLogin.vue';
 import AuthLogout from './components/AuthLogout.vue';
 import LkProfile from './components/lk/lkProfile.vue';
 import LkDelivery from './components/lk/lkDelivery.vue';
+import LkPassword from './components/lk/lkPassword.vue';
 
 const store = useStore();
 
@@ -21,11 +22,7 @@ fetch('/api/auth/whoami', {
   if (200 === response.status){
     store.commit('login');
   }
-  return response.json()
 })
-.then(data => {
-  store.commit('profile', data.payload);
-});
 
 // store.watch(
 //   (state, getters) => getters.isAuthorized,
@@ -34,7 +31,7 @@ fetch('/api/auth/whoami', {
 //   }
 // );
 
-const logOrReg = ref(null);
+const logOrReg = shallowRef(AuthRegister);
 
 </script>
 
@@ -45,14 +42,14 @@ const logOrReg = ref(null);
     </div>
 
     <div v-if="!store.getters.isAuthorized">
-      <div class="title">
-        <a href="#" :class="logOrReg ? 'active' : ''" @click.prevent="logOrReg = true">Register</a>
+      <h3 style="font-weight: 100;">
+        <a href="#" :class="{ active: logOrReg === AuthRegister }" @click.prevent="logOrReg = AuthRegister">Register</a>
         |
-        <a href="#" :class="logOrReg ? '' : 'active'" @click.prevent="logOrReg = false">Log in</a>
-      </div>
+        <a href="#" :class="{ active: logOrReg === AuthLogin }" @click.prevent="logOrReg = AuthLogin">Log in</a>
+      </h3>
 
       <div>
-        <component :is="logOrReg ? AuthRegister : AuthLogin" />
+        <component :is="logOrReg" />
       </div>
 
       <div class="foreign-services">
@@ -64,6 +61,10 @@ const logOrReg = ref(null);
 
     <div v-if="store.getters.isAuthorized">
       <AuthLogout/>
+    </div>
+
+    <div v-if="store.getters.isAuthorized">
+      <LkPassword/>
     </div>
 
   </div>
@@ -83,9 +84,39 @@ const logOrReg = ref(null);
 </template>
 
 <style>
-#app {
+body {
+  background-color: #efefef;
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  font-size: 7pt;
+  font-size: 9pt;
+}
+
+a {
+  color: #065748;
+  text-decoration: none;
+}
+
+a:hover {
+  color:crimson;
+}
+
+input {
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: .32em;
+}
+
+button {
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: .32em .64em;
+}
+
+input[readonly] {
+  color: rgb(80, 71, 71);
+  border-width: 1px;
+}
+
+#app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -101,10 +132,18 @@ const logOrReg = ref(null);
 
 .flex-container > div {
   padding: .33em;
+  /*
   border: 1px solid #ccc;
   border-radius: .72em;
+  */
   padding: 1em;
-  margin: 0.33em;
+  margin: 1em;
+  box-shadow: .32em .12em .4em #ccc, -.32em 0 .4em #ddd;
+  background-color: #fff;
+}
+
+h3 {
+  text-align: center;
 }
 
 .title {
@@ -113,7 +152,7 @@ const logOrReg = ref(null);
   font-size: 1.2em;
 }
 
-.title .active {
+.active {
   font-weight: 900;
 }
 
