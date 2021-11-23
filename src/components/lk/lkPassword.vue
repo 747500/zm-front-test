@@ -6,6 +6,8 @@ const lkPasswordDto = ref({
   new: null,
 });
 
+const resultMessage = ref('');
+
 const passwordConfirm = ref('');
 
 function passwordUpdate() {
@@ -18,8 +20,13 @@ function passwordUpdate() {
     body: JSON.stringify(lkPasswordDto.value),
   })
   .then(async response => {
-    if (200 === response.status) {
-      profileData.value = await response.json();
+    if (201 === response.status) {
+      resultMessage.value = 'Ok';
+      setTimeout(() => { resultMessage.value = '' }, 3000);
+    }
+    else {
+      const data = await response.json();
+      resultMessage.value = data.payload ? data.payload : data;
     }
   });
 }
@@ -44,6 +51,7 @@ div
     label() submit
     button(type="submit" :disabled="lkPasswordDto.new !== passwordConfirm || passwordConfirm.length < 8") Update
 
+  <pre>{{ resultMessage}}</pre>
 </template>
 
 <style scoped>
