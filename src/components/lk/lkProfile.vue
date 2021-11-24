@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import { useStore } from 'vuex'
+
+const store = useStore();
 
 const showRaw = ref(false);
 
@@ -19,7 +22,7 @@ function profileLoad() {
 
 function profileUpdate() {
   fetch('/api/lk/profile', {
-    method: 'PUT',
+    method: 'POST',
     credentials: 'include',
     headers: {
       'content-type': 'application/json'
@@ -40,9 +43,9 @@ profileLoad();
 
 <template lang="pug">
 div
-  h3 Profile
-  pre(v-if="showRaw" class="raw") {{ profileData }}
-  form(v-if="!showRaw" @submit.prevent="profileUpdate")
+  h3 Профиль
+  pre(v-if="store.getters.showRaw" class="raw") {{ profileData }}
+  form(v-if="!store.getters.showRaw" @submit.prevent="profileUpdate")
     label() ID
     input(v-model="profileData.id" readonly)
 
@@ -74,7 +77,8 @@ div
     input(v-model="profileData.updated_at" type="datetime" readonly)
 
     label() submit
-    button(type="submit") Update
+    button(type="submit")
+      | POST /api/lk/profile
 
 </template>
 

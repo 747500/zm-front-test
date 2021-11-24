@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@popperjs/core": "^2.10.2",
     "pug": "^3.0.2",
     "vue": "^3.2.16",
     "vuex": "^4.0.2"

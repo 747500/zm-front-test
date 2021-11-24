@@ -20,7 +20,7 @@ function logout() {
 
 <template lang="pug">
 div
-  h3 Log out
+  h3 Выход
   br
   pre(class="raw") {{ store.getters.profile }}
 

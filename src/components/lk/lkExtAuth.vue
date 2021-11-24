@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import { useStore } from 'vuex'
 
-const showRaw = ref(false);
+const store = useStore();
 
 const extAuth = ref({});
 
@@ -30,13 +31,13 @@ listExtAuth();
 
 <template lang="pug">
 div
-  h3 Social link
-  form
+  h3 Соц. сети
+  form(v-if="!store.getters.showRaw")
     template(v-for="item in extAuth")
       label(:for="item.name") {{ item.name }}
       input(type="checkbox" :id="item.name" :checked="item.status" onclick="return false;")
 
-  pre(v-if="showRaw" class="raw") {{ extAuth }}
+  pre(v-if="store.getters.showRaw" class="raw") {{ extAuth }}
 
 </template>
 

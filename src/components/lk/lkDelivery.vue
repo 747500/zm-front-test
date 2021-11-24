@@ -1,5 +1,9 @@
 <script setup>
 import { ref } from 'vue';
+import { useStore } from 'vuex'
+//import { createPopper } from '@popperjs/core';
+
+const store = useStore();
 
 const addressList = ref({});
 
@@ -66,15 +70,19 @@ updateList();
 
 <template lang="pug">
 div
-  h3 Delivery addresses
-  div(class="address-list")
+  h3 Адреса для доставки
+
+  div(v-if="!store.getters.showRaw" class="address-list")
     input(id="add-delivery-address" v-model="newAddress")
-    button(type="button" @click="createDeliveryAddress" ) +
+    button(type="button" @click="createDeliveryAddress" title="POST /api/lk/delivery") +
     span
     template(class="raw" v-for="item in addressList" :key="item.id")
       input(v-model="item.address")/
-      button(type="button" @click="updateDeliveryAddress(item.id)") S
-      button(type="button" @click="deleteDeliveryAddress(item.id)") -
+      button(type="button" @click="updateDeliveryAddress(item.id)" :title="`PUT /api/lk/delivery/${item.id}`") S
+      button(type="button" @click="deleteDeliveryAddress(item.id)" :title="`DELETE /api/lk/delivery/${item.id}`") -
+
+  pre(v-if="store.getters.showRaw" class="raw") {{ addressList }}
+
 </template>
 
 <style scoped>

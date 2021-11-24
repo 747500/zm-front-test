@@ -36,7 +36,7 @@ function passwordUpdate() {
 
 <template lang="pug">
 div
-  h3 Password
+  h3 Установка/смена пароля
 
   form(@submit.prevent="passwordUpdate")
     label() current password
@@ -49,7 +49,8 @@ div
     input(v-model="passwordConfirm" @keyup="passwordCompare" type="password")
 
     label() submit
-    button(type="submit" :disabled="lkPasswordDto.new !== passwordConfirm || passwordConfirm.length < 8") Update
+    button(type="submit" :disabled="lkPasswordDto.new !== passwordConfirm || passwordConfirm.length < 8")
+      | POST /api/auth/password
 
   <pre>{{ resultMessage}}</pre>
 </template>
@@ -58,7 +59,7 @@ div
 
 form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 3fr;
   column-gap: 0.12em;
   row-gap: 0.6em;
   align-items: baseline;

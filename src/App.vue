@@ -36,55 +36,50 @@ const logOrReg = shallowRef(AuthRegister);
 
 </script>
 
-<template>
-  <div class="flex-container">
-    <div class="hello-world">
-      <HelloWorld msg="Hello Vue 3 + Vite" />
-    </div>
+<template lang="pug">
+div(class="settings")
+  form()
+    input(id="showRaw" type="checkbox" @click="store.commit('toggleRaw')" :checked="store.getters.showRaw")
+    label(for="showRaw") raw data
 
-    <div v-if="!store.getters.isAuthorized">
-      <h3 style="font-weight: 100;">
-        <a href="#" :class="{ active: logOrReg === AuthRegister }" @click.prevent="logOrReg = AuthRegister">Register</a>
-        |
-        <a href="#" :class="{ active: logOrReg === AuthLogin }" @click.prevent="logOrReg = AuthLogin">Log in</a>
-      </h3>
+div(class="flex-container")
+  div(class="hello-world")
+    HelloWorld(msg="Hello Vue 3 + Vite")
 
-      <div>
-        <component :is="logOrReg" />
-      </div>
+  div(v-if="!store.getters.isAuthorized")
+    h3(style="font-weight: 100;")
+      a(href="#" :class="{ active: logOrReg === AuthRegister }" @click.prevent="logOrReg = AuthRegister") Register
+      | |
+      a(href="#" :class="{ active: logOrReg === AuthLogin }" @click.prevent="logOrReg = AuthLogin") Log in
 
-      <div class="foreign-services">
-        <a href="/api/auth/facebook">FB</a>
-        <a href="/api/auth/vk">VK</a>
-        <a href="/api/auth/okru">OK</a>
-      </div>
-    </div>
+    div
+      component(:is="logOrReg")
 
-    <div v-if="store.getters.isAuthorized">
-      <AuthLogout/>
-    </div>
+    div(class="foreign-services")
+      a(href="/api/auth/facebook") FB
+      a(href="/api/auth/vk") VK
+      a(href="/api/auth/okru") OK
 
-    <div v-if="store.getters.isAuthorized">
-      <LkPassword/>
-    </div>
+  div(v-if="store.getters.isAuthorized")
+    AuthLogout()
 
-  </div>
+  div(v-if="store.getters.isAuthorized")
+    LkPassword()
 
+div(v-if="store.getters.isAuthorized")
+  div(class="app-menu")
+    h2 Личный кабинет
 
-  <div v-if="store.getters.isAuthorized">
-    <h2>LK</h2>
-    <div class="flex-container">
-      <div>
-        <LkProfile/>
-      </div>
-      <div>
-        <LkExtAuth/>
-      </div>
-      <div>
-        <LkDelivery/>
-      </div>
-    </div>
-  </div>
+  div(class="flex-container")
+    div
+      LkProfile()
+
+    div
+      LkExtAuth()
+
+    div
+      LkDelivery()
+
 </template>
 
 <style>
@@ -92,6 +87,8 @@ body {
   background-color: #efefef;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   font-size: 9pt;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -126,6 +123,20 @@ input[readonly] {
   color: #2c3e50;
 }
 
+.settings {
+  padding: 1em;
+  margin: 0 0 1em 0;
+  box-shadow: .32em .12em .4em #ccc, -.32em 0 .4em #ddd;
+  background-color: #fff;
+}
+
+.app-menu {
+  padding: 1em;
+  margin: 1em 0 1em 0;
+  box-shadow: .32em .12em .4em #ccc, -.32em 0 .4em #ddd;
+  background-color: #fff;
+}
+
 .hello-world {
   background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), center no-repeat url('./assets/logo.png');
 }
@@ -135,7 +146,6 @@ input[readonly] {
 }
 
 .flex-container > div {
-  padding: .33em;
   /*
   border: 1px solid #ccc;
   border-radius: .72em;
