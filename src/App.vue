@@ -12,6 +12,7 @@ import AuthLogout from './components/AuthLogout.vue';
 import LkProfile from './components/lk/lkProfile.vue';
 import LkDelivery from './components/lk/lkDelivery.vue';
 import LkPassword from './components/lk/lkPassword.vue';
+import LkExtAuth from './components/lk/lkExtAuth.vue';
 
 const store = useStore();
 
@@ -75,6 +76,9 @@ const logOrReg = shallowRef(AuthRegister);
     <div class="flex-container">
       <div>
         <LkProfile/>
+      </div>
+      <div>
+        <LkExtAuth/>
       </div>
       <div>
         <LkDelivery/>

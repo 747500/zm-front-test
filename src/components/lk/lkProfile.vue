@@ -34,21 +34,6 @@ function profileUpdate() {
   });
 }
 
-const extAuth = ref({});
-
-//function listExtAuth() {
-  fetch('/api/lk/profile/ext-auth', {
-    method: 'GET',
-    credentials: 'include',
-  })
-  .then(response => {
-    return response.json();
-  })
-  .then(body => {
-    extAuth.value = body;
-  });
-//}
-
 profileLoad();
 
 </script>
@@ -90,8 +75,6 @@ div
 
     label() submit
     button(type="submit") Update
-
-  pre(class="raw") {{ extAuth }}
 
 </template>
 
