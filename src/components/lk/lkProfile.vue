@@ -22,7 +22,7 @@ function profileLoad() {
 
 function profileUpdate() {
   fetch('/api/lk/profile', {
-    method: 'POST',
+    method: 'PUT',
     credentials: 'include',
     headers: {
       'content-type': 'application/json'
