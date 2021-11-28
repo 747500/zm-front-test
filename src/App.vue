@@ -6,10 +6,12 @@ import { shallowRef } from 'vue'
 import { useStore } from 'vuex'
 
 import HelloWorld from './components/HelloWorld.vue'
-import AuthRegister from './components/AuthRegister.vue';
-import AuthLogin from './components/AuthLogin.vue';
-import AuthPasswordRecovery from './components/lk/AuthPasswordRecovery.vue';
-import AuthLogout from './components/AuthLogout.vue';
+
+import AuthRegister from './components/Auth/Register.vue';
+import AuthLogin from './components/Auth/Login.vue';
+import AuthPasswordRecovery from './components/Auth/PasswordRecovery.vue';
+import AuthLogout from './components/Auth/Logout.vue';
+
 import LkPassword from './components/lk/lkPassword.vue';
 
 const store = useStore();
@@ -49,6 +51,7 @@ div(class="flex-container")
       a(href="#" :class="{ active: logOrReg === AuthRegister }" @click.prevent="logOrReg = AuthRegister") Register
       a(href="#" :class="{ active: logOrReg === AuthLogin }" @click.prevent="logOrReg = AuthLogin") Log in
       a(href="#" :class="{ active: logOrReg === AuthPasswordRecovery }" @click.prevent="logOrReg = AuthPasswordRecovery") Recovery
+
     div(class="component")
       component(:is="logOrReg")
 
