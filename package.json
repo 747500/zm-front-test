@@ -10,6 +10,7 @@
     "@popperjs/core": "^2.10.2",
     "pug": "^3.0.2",
     "vue": "^3.2.16",
+    "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

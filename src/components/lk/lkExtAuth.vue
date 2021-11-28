@@ -15,6 +15,7 @@ function listExtAuth() {
     return response.json();
   })
   .then(body => {
+    console.log(body);
     extAuth.value = Object.keys(body.payload).map((k) => {
       return {
         name: k,

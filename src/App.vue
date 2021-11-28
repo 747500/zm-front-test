@@ -8,11 +8,9 @@ import { useStore } from 'vuex'
 import HelloWorld from './components/HelloWorld.vue'
 import AuthRegister from './components/AuthRegister.vue';
 import AuthLogin from './components/AuthLogin.vue';
+import AuthPasswordRecovery from './components/lk/AuthPasswordRecovery.vue';
 import AuthLogout from './components/AuthLogout.vue';
-import LkProfile from './components/lk/lkProfile.vue';
-import LkDelivery from './components/lk/lkDelivery.vue';
 import LkPassword from './components/lk/lkPassword.vue';
-import LkExtAuth from './components/lk/lkExtAuth.vue';
 
 const store = useStore();
 
@@ -46,13 +44,12 @@ div(class="flex-container")
   div(class="hello-world")
     HelloWorld(msg="Hello Vue 3 + Vite")
 
-  div(v-if="!store.getters.isAuthorized")
-    h3(style="font-weight: 100;")
+  div(v-if="!store.getters.isAuthorized" class="login-options")
+    h3(class="flex-container" style="font-weight: 100;")
       a(href="#" :class="{ active: logOrReg === AuthRegister }" @click.prevent="logOrReg = AuthRegister") Register
-      | |
       a(href="#" :class="{ active: logOrReg === AuthLogin }" @click.prevent="logOrReg = AuthLogin") Log in
-
-    div
+      a(href="#" :class="{ active: logOrReg === AuthPasswordRecovery }" @click.prevent="logOrReg = AuthPasswordRecovery") Recovery
+    div(class="component")
       component(:is="logOrReg")
 
     div(class="foreign-services")
@@ -66,19 +63,7 @@ div(class="flex-container")
   div(v-if="store.getters.isAuthorized")
     LkPassword()
 
-div(v-if="store.getters.isAuthorized")
-  div(class="app-menu")
-    h2 Личный кабинет
-
-  div(class="flex-container")
-    div
-      LkProfile()
-
-    div
-      LkExtAuth()
-
-    div
-      LkDelivery()
+router-view()
 
 </template>
 
@@ -121,6 +106,17 @@ input[readonly] {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.login-options h3 a {
+  display: block;
+  text-align: center;
+  flex-basis: 33%;
+}
+
+.login-options .component {
+  border-top: 1px dashed #ccc;
+  padding: 1em 0;
 }
 
 .settings {

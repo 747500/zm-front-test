@@ -6,7 +6,6 @@ const store = useStore();
 
 const authRegisterDto = ref({
   email: null,
-  phone: null,
   password: null,
 });
 
@@ -20,13 +19,14 @@ function authRegisterSubmit(event) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(authRegisterDto.value),
-    credentials: 'include',
   })
   .then(response => {
+    console.log(response);
     if (201 === response.status) {
       store.commit('login');
     }
   })
+  .catch(console.error);
 
 }
 
@@ -39,8 +39,10 @@ function authRegisterSubmit(event) {
       <label for="auth-register-email">E-mail</label>
       <input id="auth-register-email" name="email" type="email" v-model="authRegisterDto.email"/>
 
+      <!--
       <label for="auth-register-phone">Phone</label>
       <input id="auth-register-phone" name="phone" type="text" v-model="authRegisterDto.phone"/>
+      -->
 
       <label for="auth-register-password">Password</label>
       <input id="auth-register-password" name="password" type="password" v-model="authRegisterDto.password"/>
