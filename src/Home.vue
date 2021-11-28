@@ -14,7 +14,7 @@ div(v-if="store.getters.isAuthorized")
   div(class="app-menu")
     h2 Личный кабинет
 
-  div(class="flex-container")
+  div(class="flex-container box-container")
     div
       LkProfile()
 
@@ -25,3 +25,4 @@ div(v-if="store.getters.isAuthorized")
       LkDelivery()
 
 </template>
+ 

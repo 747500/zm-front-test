@@ -129,6 +129,12 @@ input[readonly] {
   margin: 0 0 1em 0;
   box-shadow: .32em .12em .4em #ccc, -.32em 0 .4em #ddd;
   background-color: #fff;
+  align-items: baseline;
+}
+
+.settings > * {
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .app-menu {
