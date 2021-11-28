@@ -37,12 +37,14 @@ const logOrReg = shallowRef(AuthRegister);
 </script>
 
 <template lang="pug">
-div(class="settings")
+div(class="settings flex-container")
   form()
     input(id="showRaw" type="checkbox" @click="store.commit('toggleRaw')" :checked="store.getters.showRaw")
     label(for="showRaw") raw data
 
-div(class="flex-container")
+  router-link(:to="{ name: 'Home' }" class ="btn btn-info") Home
+
+div(class="box-container flex-container")
   div(class="hello-world")
     HelloWorld(msg="Hello Vue 3 + Vite")
 
@@ -144,7 +146,7 @@ input[readonly] {
   display: flex;
 }
 
-.flex-container > div {
+.box-container > div {
   /*
   border: 1px solid #ccc;
   border-radius: .72em;

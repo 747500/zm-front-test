@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import Home from './Home.vue';
 import PasswordRecovery from './PasswordRecovery.vue';
+import Page404 from './404.vue';
 
 const routes = [
   {
@@ -15,7 +16,7 @@ const routes = [
   },
   {
     path: "/:catchAll(.*)",
-    component: Home,
+    component: Page404,
   },
 ];
 
