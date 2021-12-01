@@ -7,7 +7,7 @@ const router = useRouter()
 const route = useRoute()
 
 const dto = ref({
-  password: null,
+  password: '',
   token: route.query.token,
 });
 
@@ -30,7 +30,7 @@ function setPassword() {
 </script>
 
 <template lang="pug">
-div(class="flex-container")
+div(class="flex-container box-container")
   div
     h3 Password recovery
     form(@submit.prevent="setPassword")
@@ -43,7 +43,7 @@ div(class="flex-container")
       input(v-model="dto.confirm" type="password")
 
       label() Submit form
-      button(type="submit" :disabled="dto.password === 0")
+      button(type="submit" :disabled="dto.password.length < 8 || dto.password !== dto.confirm")
         | PUT /api/auth/password/recovery
 
     <pre>{{ resultMessage}}</pre>

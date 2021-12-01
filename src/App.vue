@@ -50,9 +50,9 @@ div(class="box-container flex-container")
 
   div(v-if="!store.getters.isAuthorized" class="login-options")
     h3(class="flex-container" style="font-weight: 100;")
-      a(href="#" :class="{ active: logOrReg === AuthRegister }" @click.prevent="logOrReg = AuthRegister") Register
+      a(href="#" :class="{ active: logOrReg === AuthRegister }" @click.prevent="logOrReg = AuthRegister") New user
       a(href="#" :class="{ active: logOrReg === AuthLogin }" @click.prevent="logOrReg = AuthLogin") Log in
-      a(href="#" :class="{ active: logOrReg === AuthPasswordRecovery }" @click.prevent="logOrReg = AuthPasswordRecovery") Recovery
+      a(href="#" :class="{ active: logOrReg === AuthPasswordRecovery }" @click.prevent="logOrReg = AuthPasswordRecovery") Lost password
 
     div(class="component")
       component(:is="logOrReg")
@@ -116,7 +116,12 @@ input[readonly] {
 .login-options h3 a {
   display: block;
   text-align: center;
-  flex-basis: 33%;
+  padding: .5em 1em;
+  /* flex-basis: 33%; */
+}
+
+.login-options h3 a.active {
+  background-color: rgb(238, 253, 196);
 }
 
 .login-options .component {

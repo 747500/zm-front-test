@@ -3,12 +3,13 @@
 </script>
 
 <template lang="pug">
-div(class="page flex-container")
+div(class="page flex-container page-404")
   div
   div(class="flex-container column")
     div
-    div(class="message")
-      h1 Page Not Found
+    div(class="message column flex-container")
+      h1 404
+      h2 Page Not Found
       p
         router-link(:to="{ name: 'Home' }" class ="btn btn-info") Home
     div
@@ -46,12 +47,21 @@ div {
   flex-basis: 33%;
 }
 
-.message {
+.page.page-404 .message {
   text-align: center;
 
   padding: 1em;
   margin: 1em 0 1em 0;
   box-shadow: .25em .25em .5em #555, -.25em 0 .4em #555;
   background-color: #fff;
+
+  color: darkred;
+
+  display: flex;
 }
+
+.flex-container.message > *{
+  flex-basis: 33%;
+}
+
 </style>

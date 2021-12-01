@@ -3,11 +3,19 @@ import { ref } from 'vue';
 import { useStore } from 'vuex'
 //import { createPopper } from '@popperjs/core';
 
+import DeliveryForm from './Delivery/Form.vue';
+
 const store = useStore();
 
-const addressList = ref({});
+const addressList = ref([]);
 
-const newAddress = ref('');
+const dto = ref({
+  region: '',
+  city: '',
+  address: '',
+  kv: '',
+  comment: '',
+});
 
 function updateList() {
     fetch('/api/lk/delivery', {
@@ -29,18 +37,16 @@ function createDeliveryAddress() {
     headers: {
       'content-type': 'application/json',
     },
-    body: JSON.stringify({
-      address: newAddress.value,
-    }),
+    body: JSON.stringify(dto.value),
   })
   .then(() => {
     updateList();
-    newAddress.value = '';
+    Object.keys(dto.value).forEach(k => dto.value[k] = '');
   });
 }
 
 function updateDeliveryAddress(id) {
-  const { address } = addressList.value.find(item => item.id === id);
+  const item = addressList.value.find(item => item.id === id);
 
   fetch(`/api/lk/delivery/${id}`, {
     method: 'PUT',
@@ -48,7 +54,7 @@ function updateDeliveryAddress(id) {
     headers: {
       'content-type': 'application/json',
     },
-    body: JSON.stringify({ address }),
+    body: JSON.stringify(item),
   })
   .then(() => {
     updateList();
@@ -72,25 +78,39 @@ updateList();
 div
   h3 Адреса для доставки
 
+  div
+    DeliveryForm(:dto="dto" class="dto")
+      template(v-slot:submit)
+        label() create
+        button(@click="createDeliveryAddress()") POST /api/lk/delivery
+    br
+
   div(v-if="!store.getters.showRaw" class="address-list")
-    input(id="add-delivery-address" v-model="newAddress")
-    button(type="button" @click="createDeliveryAddress" title="POST /api/lk/delivery") +
-    span
-    template(class="raw" v-for="item in addressList" :key="item.id")
-      input(v-model="item.address")/
-      button(type="button" @click="updateDeliveryAddress(item.id)" :title="`PUT /api/lk/delivery/${item.id}`") S
-      button(type="button" @click="deleteDeliveryAddress(item.id)" :title="`DELETE /api/lk/delivery/${item.id}`") -
+    div(class="item" v-for="item in addressList" :key="item.id")
+      DeliveryForm(class="dto" :dto="item")
+        template(v-slot:submit)
+          label() update
+          button(type="button" @click="updateDeliveryAddress(item.id)") PUT /api/lk/delivery/{{ item.id }}
+
+          label() delete
+          button(type="button" @click="deleteDeliveryAddress(item.id)") DELETE /api/lk/delivery/{{ item.id }}
 
   pre(v-if="store.getters.showRaw" class="raw") {{ addressList }}
 
 </template>
 
 <style scoped>
-.address-list {
+form.dto {
   display: grid;
-  grid-template-columns: 10fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr;
   column-gap: 0.12em;
   row-gap: 0.6em;
   align-items: baseline;
 }
+
+.address-list .item {
+  border-top: 1px dashed #ccc;
+  padding: 1em 0;
+}
+
 </style>
