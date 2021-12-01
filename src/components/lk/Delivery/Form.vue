@@ -10,14 +10,17 @@ const props = defineProps({
 
 <template lang="pug">
 form(class="dto" @submit.prevent)
-  label(v-if="props.dto.id") ID
-  input(v-if="props.dto.id" type="text" readonly v-model="props.dto.id")
+  template(v-if="props.dto.id")
+    label() ID
+    input(type="text" readonly v-model="props.dto.id")
 
-  label(v-if="props.dto.created_at") created_at
-  input(v-if="props.dto.created_at" type="text" readonly v-model="props.dto.created_at")
+  template(v-if="props.dto.created_at")
+    label() created_at
+    input(type="text" readonly v-model="props.dto.created_at")
 
-  label(v-if="props.dto.updated_at") updated_at
-  input(v-if="props.dto.updated_at" type="datetime" readonly v-model="props.dto.updated_at")
+  template(v-if="props.dto.updated_at")
+    label() updated_at
+    input(type="text" readonly v-model="props.dto.updated_at")
 
   label() region
   input(type="text" v-model="props.dto.region")
