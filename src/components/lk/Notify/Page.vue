@@ -15,15 +15,11 @@ const notify = ref({
 const notifyList = ref([]);
 
 function getNotifyList() {
-
-  let cats;
-
   const url = new URL('/api/lk/notify', window.location);
 
   if (category.value.length) {
-    cats = category.value;
-    url.searchParams.set('category', cats);
-  }  
+    url.searchParams.set('category', category.value);
+  }
 
   fetch(url, {
     method: 'GET',
@@ -39,8 +35,6 @@ function getNotifyList() {
 }
 
 function postNotify() {
-  console.log(JSON.stringify(notify.value));
-
   fetch('/api/lk/notify/forCurrentUser', {
     method: 'POST',
     credentials: 'include',
