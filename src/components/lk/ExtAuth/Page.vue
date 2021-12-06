@@ -30,14 +30,15 @@ listExtAuth();
 </script>
 
 <template lang="pug">
-div
-  h3 Соц. сети
-  form(v-if="!store.getters.showRaw")
-    template(v-for="item in extAuth")
-      label(:for="item.name") {{ item.name }}
-      input(type="checkbox" :id="item.name" :checked="item.status" onclick="return false;")
+div(class="page-ext-auth box-container")
+  div(style="width: 32rem;")
+    h3 Соц. сети
+    form(v-if="!store.getters.showRaw")
+      template(v-for="item in extAuth")
+        label(:for="item.name") {{ item.name }}
+        input(type="checkbox" :id="item.name" :checked="item.status" onclick="return false;")
 
-  pre(v-if="store.getters.showRaw" class="raw") {{ extAuth }}
+    pre(v-if="store.getters.showRaw" class="raw") {{ extAuth }}
 
 </template>
 

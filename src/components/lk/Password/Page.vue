@@ -35,29 +35,30 @@ function passwordUpdate() {
 </script>
 
 <template lang="pug">
-div
-  h3 Установка/смена пароля
+div(class="box-container")
+    div(style="width: 32rem;")
+      h3 Установка/смена пароля
 
-  form(@submit.prevent="passwordUpdate")
-    label() current password
-    input(v-model="lkPasswordDto.old" @keyup="passwordCompare" type="password")
+      form(class="page-password" @submit.prevent="passwordUpdate")
+        label() current password
+        input(v-model="lkPasswordDto.old" @keyup="passwordCompare" type="password")
 
-    label() new password
-    input(v-model="lkPasswordDto.new" @keyup="passwordCompare" type="password")
+        label() new password
+        input(v-model="lkPasswordDto.new" @keyup="passwordCompare" type="password")
 
-    label() new password (confirm)
-    input(v-model="passwordConfirm" @keyup="passwordCompare" type="password")
+        label() new password (confirm)
+        input(v-model="passwordConfirm" @keyup="passwordCompare" type="password")
 
-    label() submit
-    button(type="submit" :disabled="lkPasswordDto.new !== passwordConfirm || passwordConfirm.length < 8")
-      | POST /api/auth/password
+        label() submit
+        button(type="submit" :disabled="lkPasswordDto.new !== passwordConfirm || passwordConfirm.length < 8")
+          | POST /api/auth/password
 
-  <pre>{{ resultMessage}}</pre>
+    pre {{ resultMessage}}
 </template>
 
-<style scoped>
+<style>
 
-form {
+form.page-password {
   display: grid;
   grid-template-columns: 2fr 3fr;
   column-gap: 0.12em;

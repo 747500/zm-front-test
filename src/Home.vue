@@ -1,10 +1,6 @@
 <script setup>
 import { useStore } from 'vuex'
 
-import LkProfile from './components/lk/lkProfile.vue';
-import LkDelivery from './components/lk/lkDelivery.vue';
-import LkExtAuth from './components/lk/lkExtAuth.vue';
-
 const store = useStore();
 
 </script>
@@ -12,17 +8,20 @@ const store = useStore();
 
 div(v-if="store.getters.isAuthorized")
   div(class="app-menu")
-    h2 Личный кабинет
+    h2
+      router-link(to="/lk") Личный кабинет
 
-  div(class="flex-container box-container")
-    div
-      LkProfile()
+  router-view()
 
-    div
-      LkExtAuth()
+  //- div(class="flex-container box-container")
+  //-   div
+  //-     LkProfile()
 
-    div
-      LkDelivery()
+  //-   div
+  //-     LkExtAuth()
+
+  //-   div
+  //-     LkDelivery()
 
 </template>
  

@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useStore } from 'vuex'
 //import { createPopper } from '@popperjs/core';
 
-import DeliveryForm from './Delivery/Form.vue';
+import DeliveryForm from './Form.vue';
 
 const store = useStore();
 
@@ -75,31 +75,33 @@ updateList();
 </script>
 
 <template lang="pug">
-div
-  h3 Адреса для доставки
+div(class="page-delivery box-container flex-container")
+  div(style="width: 32rem;")
+    h3 Адреса для доставки
 
-  div
-    DeliveryForm(:dto="dto" class="dto")
-      template(v-slot:submit)
-        label() create
-        button(@click="createDeliveryAddress()") POST /api/lk/delivery
-    br
-
-  div(v-if="!store.getters.showRaw" class="address-list")
-    div(class="item" v-for="item in addressList" :key="item.id")
-      DeliveryForm(class="dto" :dto="item")
+    div
+      DeliveryForm(:dto="dto" class="dto")
         template(v-slot:submit)
-          label() update
-          button(type="button" @click="updateDeliveryAddress(item.id)") PUT /api/lk/delivery/{{ item.id }}
+          label() create
+          button(@click="createDeliveryAddress()") POST /api/lk/delivery
 
-          label() delete
-          button(type="button" @click="deleteDeliveryAddress(item.id)") DELETE /api/lk/delivery/{{ item.id }}
+  div(style="width: 32rem;")
+    div(v-if="!store.getters.showRaw" class="address-list")
+      div(class="item" v-for="item in addressList" :key="item.id")
+        DeliveryForm(class="dto" :dto="item")
+          template(v-slot:submit)
+            label() update
+            button(type="button" @click="updateDeliveryAddress(item.id)") PUT /api/lk/delivery/{{ item.id }}
 
-  pre(v-if="store.getters.showRaw" class="raw") {{ addressList }}
+            label() delete
+            button(type="button" @click="deleteDeliveryAddress(item.id)") DELETE /api/lk/delivery/{{ item.id }}
+
+    pre(v-if="store.getters.showRaw" class="raw") {{ addressList }}
 
 </template>
 
 <style scoped>
+
 form.dto {
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -109,8 +111,10 @@ form.dto {
 }
 
 .address-list .item {
-  border-top: 1px dashed #ccc;
+  border-top: 3px dotted #ccc;
   padding: 1em 0;
 }
-
+.address-list .item:first-child {
+  border-top: none;
+}
 </style>

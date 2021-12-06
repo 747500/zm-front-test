@@ -11,7 +11,7 @@ div(class="page flex-container page-404")
       h1 404
       h2 Page Not Found
       p
-        router-link(:to="{ name: 'Home' }" class ="btn btn-info") Home
+        router-link(:to="{ name: 'Home' }") Home
     div
   div
 </template>

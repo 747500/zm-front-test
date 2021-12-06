@@ -12,8 +12,6 @@ import AuthLogin from './components/Auth/Login.vue';
 import AuthPasswordRecovery from './components/Auth/PasswordRecovery.vue';
 import AuthLogout from './components/Auth/Logout.vue';
 
-import LkPassword from './components/lk/lkPassword.vue';
-
 const store = useStore();
 
 fetch('/api/auth/whoami', {
@@ -64,9 +62,6 @@ div(class="box-container flex-container")
 
   div(v-if="store.getters.isAuthorized")
     AuthLogout()
-
-  div(v-if="store.getters.isAuthorized")
-    LkPassword()
 
 router-view()
 
