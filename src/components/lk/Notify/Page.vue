@@ -92,7 +92,7 @@ div(class="box-container flex-container notify-container")
       input(type="text" v-model="notify.message")
 
       label() submit
-      button(type="submit") POST
+      button(type="submit" :disabled="!(notify.title.length && notify.message.length && notify.category.length)") POST
 
 
   div(class="notify-list")
