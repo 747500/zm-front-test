@@ -75,7 +75,7 @@ updateList();
 </script>
 
 <template lang="pug">
-div(class="page-delivery box-container flex-container")
+div(class="delivery-container box-container flex-container")
   div(style="width: 32rem;")
     h3 Адреса для доставки
 
@@ -101,6 +101,10 @@ div(class="page-delivery box-container flex-container")
 </template>
 
 <style scoped>
+
+.delivery-container {
+  align-items: flex-start;
+}
 
 form.dto {
   display: grid;
