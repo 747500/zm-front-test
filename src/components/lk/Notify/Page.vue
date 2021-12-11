@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 
 const store = useStore();
 
@@ -25,13 +25,13 @@ function getNotifyList() {
     method: 'GET',
     credentials: 'include',
   })
-  .then(response => {
-    return response.json();
-  })
-  .then(response => {
-    notifyList.value = response.payload;
-  })
-  .catch(console.error);
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      notifyList.value = response.payload;
+    })
+    .catch(console.error);
 }
 
 function postNotify() {
@@ -39,29 +39,25 @@ function postNotify() {
     method: 'POST',
     credentials: 'include',
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
     body: JSON.stringify(notify.value),
-  })
-  .then(() => {
+  }).then(() => {
     getNotifyList();
-  })
+  });
 }
 
 function setRead(id) {
   fetch(`/api/lk/notify/${id}`, {
     method: 'PUT',
     credentials: 'include',
-  })
-  .then(() => {
+  }).then(() => {
     getNotifyList();
-  })
+  });
 }
 
 getNotifyList();
-
 </script>
-
 
 <template lang="pug">
 div(class="box-container flex-container notify-container")
@@ -119,10 +115,7 @@ div(class="box-container flex-container notify-container")
 
 </template>
 
-
-
 <style scoped>
-
 .notify-container {
   align-items: flex-start;
 }
@@ -153,5 +146,4 @@ form.new-notify {
   margin: 0;
   padding: 1rem 0;
 }
-
 </style>

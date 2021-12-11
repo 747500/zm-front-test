@@ -4,25 +4,24 @@ export const userProfile = {
   }),
 
   mutations: {
-    login (state) {
+    login(state) {
       state.authorized = true;
     },
 
-    logout (state) {
+    logout(state) {
       state.authorized = false;
     },
   },
 
   actions: {
-    test () {
+    test() {
       console.log('==== test actions');
-    }
+    },
   },
 
   getters: {
-    isAuthorized (state) {
+    isAuthorized(state) {
       return state.authorized;
     },
-
-  }
+  },
 };

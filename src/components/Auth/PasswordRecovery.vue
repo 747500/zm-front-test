@@ -14,26 +14,24 @@ function requestPasswordRecovery() {
     method: 'POST',
     credentials: 'include',
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
     body: JSON.stringify({
       ...lkLostPasswordDto.value,
-      url: url.toString()
-      }),
-  })
-  .then(async response => {
+      url: url.toString(),
+    }),
+  }).then(async (response) => {
     if (201 === response.status) {
       resultMessage.value = 'Ok';
-      setTimeout(() => { resultMessage.value = '' }, 3000);
-    }
-    else {
+      setTimeout(() => {
+        resultMessage.value = '';
+      }, 3000);
+    } else {
       const data = await response.json();
       resultMessage.value = data.payload ? data.payload : data;
     }
   });
 }
-
-
 </script>
 
 <template lang="pug">
@@ -50,7 +48,6 @@ div
 </template>
 
 <style scoped>
-
 form {
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -58,5 +55,4 @@ form {
   row-gap: 0.6em;
   align-items: baseline;
 }
-
 </style>

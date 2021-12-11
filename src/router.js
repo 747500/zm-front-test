@@ -8,17 +8,17 @@ import LkPasswordPage from './components/lk/Password/Page.vue';
 import LkNotifyPage from './components/lk/Notify/Page.vue';
 
 import PasswordRecovery from './PasswordRecovery.vue';
-import Page404 from './404.vue';
+import Page404 from './Page404.vue';
 
 const routes = [
   {
     path: '/',
-    name: "Home",
+    name: 'Home',
     component: Home,
     children: [
       {
         path: '/lk',
-        name: "Личный кабинет",
+        name: 'Личный кабинет',
         component: LkPage,
         children: [
           {
@@ -38,25 +38,25 @@ const routes = [
           },
           {
             path: 'delivery',
-            name: "Адреса для доставки",
+            name: 'Адреса для доставки',
             component: LkDeliveryPage,
           },
           {
             path: 'notify',
             name: 'Уведомления',
             component: LkNotifyPage,
-          }
-        ]
+          },
+        ],
       },
-    ]
+    ],
   },
   {
-    path: "/passwordRecovery",
-    name: "Password Recovery",
+    path: '/passwordRecovery',
+    name: 'Password Recovery',
     component: PasswordRecovery,
   },
   {
-    path: "/:catchAll(.*)",
+    path: '/:catchAll(.*)',
     component: Page404,
   },
 ];

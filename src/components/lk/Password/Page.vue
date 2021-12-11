@@ -15,23 +15,21 @@ function passwordUpdate() {
     method: 'POST',
     credentials: 'include',
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
     body: JSON.stringify(lkPasswordDto.value),
-  })
-  .then(async response => {
+  }).then(async (response) => {
     if (201 === response.status) {
       resultMessage.value = 'Ok';
-      setTimeout(() => { resultMessage.value = '' }, 3000);
-    }
-    else {
+      setTimeout(() => {
+        resultMessage.value = '';
+      }, 3000);
+    } else {
       const data = await response.json();
       resultMessage.value = data.payload ? data.payload : data;
     }
   });
 }
-
-
 </script>
 
 <template lang="pug">
@@ -57,7 +55,6 @@ div(class="box-container")
 </template>
 
 <style>
-
 form.page-password {
   display: grid;
   grid-template-columns: 2fr 3fr;
@@ -65,5 +62,4 @@ form.page-password {
   row-gap: 0.6em;
   align-items: baseline;
 }
-
 </style>

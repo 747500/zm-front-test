@@ -1,6 +1,4 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template lang="pug">
 div(class="page flex-container page-404")
@@ -17,7 +15,6 @@ div(class="page flex-container page-404")
 </template>
 
 <style scoped>
-
 div {
   align-items: stretch;
 }
@@ -29,7 +26,6 @@ div {
   flex-direction: column;
 }
 .page {
-
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 
   position: absolute;
@@ -43,7 +39,7 @@ div {
   flex-basis: 33%;
 }
 
-.flex-container.column > div{
+.flex-container.column > div {
   flex-basis: 33%;
 }
 
@@ -52,7 +48,7 @@ div {
 
   padding: 1em;
   margin: 1em 0 1em 0;
-  box-shadow: .25em .25em .5em #555, -.25em 0 .4em #555;
+  box-shadow: 0.25em 0.25em 0.5em #555, -0.25em 0 0.4em #555;
   background-color: #fff;
 
   color: darkred;
@@ -60,8 +56,7 @@ div {
   display: flex;
 }
 
-.flex-container.message > *{
+.flex-container.message > * {
   flex-basis: 33%;
 }
-
 </style>

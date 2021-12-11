@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 
 const store = useStore();
 
@@ -11,22 +11,20 @@ function listExtAuth() {
     method: 'GET',
     credentials: 'include',
   })
-  .then(response => {
-    return response.json();
-  })
-  .then(body => {
-    extAuth.value = Object.keys(body.payload).map((k) => {
-      return {
-        name: k,
-        status: body.payload[k],
-      };
+    .then((response) => {
+      return response.json();
+    })
+    .then((body) => {
+      extAuth.value = Object.keys(body.payload).map((k) => {
+        return {
+          name: k,
+          status: body.payload[k],
+        };
+      });
     });
-  });
 }
 
 listExtAuth();
-
-
 </script>
 
 <template lang="pug">
@@ -43,7 +41,6 @@ div(class="page-ext-auth box-container")
 </template>
 
 <style scoped>
-
 label {
   text-align: left;
 }
@@ -55,5 +52,4 @@ form {
   row-gap: 0.6em;
   /*align-items: baseline;*/
 }
-
 </style>

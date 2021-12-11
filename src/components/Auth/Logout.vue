@@ -1,21 +1,16 @@
 <script setup>
-
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 
 const store = useStore();
 
 function logout() {
-
   fetch('/api/auth/logout', {
     method: 'POST',
     credentials: 'include',
-  })
-  .then(response => {
+  }).then((response) => {
     store.commit('logout');
-  })
-
+  });
 }
-
 </script>
 
 <template lang="pug">
@@ -28,5 +23,4 @@ div
     button(@click="logout") POST /auth/logout
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

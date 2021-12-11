@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router';
 
-const router = useRouter()
+const router = useRouter();
 
-const route = useRoute()
+const route = useRoute();
 
 const dto = ref({
   password: '',
@@ -18,15 +18,13 @@ function setPassword() {
     method: 'PUT',
     credentials: 'include',
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
     body: JSON.stringify(dto.value),
-  })
-  .then(async response => {
+  }).then(async (response) => {
     router.replace('/');
   });
 }
-
 </script>
 
 <template lang="pug">
@@ -51,7 +49,6 @@ div(class="flex-container box-container")
 </template>
 
 <style scoped>
-
 form {
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -59,6 +56,4 @@ form {
   row-gap: 0.6em;
   align-items: baseline;
 }
-
 </style>
-

@@ -4,7 +4,7 @@ export const showRaw = {
   }),
 
   mutations: {
-    toggleRaw (state) {
+    toggleRaw(state) {
       state.show = !state.show;
     },
   },
@@ -16,9 +16,8 @@ export const showRaw = {
   // },
 
   getters: {
-    showRaw (state) {
+    showRaw(state) {
       return state.show;
     },
-
-  }
+  },
 };

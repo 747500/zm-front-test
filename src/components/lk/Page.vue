@@ -5,7 +5,6 @@ import { useStore } from 'vuex';
 const router = useRouter();
 const route = useRoute();
 const store = useStore();
-
 </script>
 
 <template lang="pug">
@@ -25,9 +24,8 @@ div(v-if="store.getters.isAuthorized")
 </template>
 
 <style>
-
 .app-menu {
-  padding: .12rem 1rem;
+  padding: 0.12rem 1rem;
 }
 
 .app-menu h3 {
@@ -42,5 +40,4 @@ div(v-if="store.getters.isAuthorized")
   display: block;
   padding: 0.5rem 1rem;
 }
-
 </style>

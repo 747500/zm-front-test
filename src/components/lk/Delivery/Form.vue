@@ -1,11 +1,9 @@
 <script setup>
-
 const props = defineProps({
-    dto: Object,
+  dto: Object,
 });
 
 //const emit = defineEmits(['submit']);
-
 </script>
 
 <template lang="pug">

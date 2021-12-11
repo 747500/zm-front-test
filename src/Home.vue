@@ -1,8 +1,7 @@
 <script setup>
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 
 const store = useStore();
-
 </script>
 <template lang="pug">
 
@@ -24,4 +23,3 @@ div(v-if="store.getters.isAuthorized")
   //-     LkDelivery()
 
 </template>
- 

@@ -1,10 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 
 const store = useStore();
-
-const showRaw = ref(false);
 
 const profileData = ref({});
 const profileValidation = ref({});
@@ -13,13 +11,12 @@ function profileLoad() {
   fetch('/api/lk/profile', {
     method: 'GET',
     credentials: 'include',
-  })
-  .then(async response => {
+  }).then(async (response) => {
     if (200 === response.status) {
       const data = await response.json();
       profileData.value = data.payload;
     }
-  })
+  });
 }
 
 function profileUpdate() {
@@ -27,34 +24,33 @@ function profileUpdate() {
     method: 'PUT',
     credentials: 'include',
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
     },
     body: JSON.stringify(profileData.value),
   })
-  .then(response => {
-    if (200 === response.status) {
-      profileLoad();
-      return;
-    }
-    return response.json();
-  })
-  .then(data => {
-    if (!data) {
-      profileValidation.value = {};
-      return;
-    }
+    .then((response) => {
+      if (200 === response.status) {
+        profileLoad();
+        return;
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (!data) {
+        profileValidation.value = {};
+        return;
+      }
 
-    if ('error' === data.status && 'Validation' === data.payload?.message) {
-      profileValidation.value = data.payload.values;
-      // Object.keys(data.payload.values).forEach(k => {
-      //   profileValidation.value[k] = true; // data.payload.values[k];
-      // })
-    }
-  })
+      if ('error' === data.status && 'Validation' === data.payload?.message) {
+        profileValidation.value = data.payload.values;
+        // Object.keys(data.payload.values).forEach(k => {
+        //   profileValidation.value[k] = true; // data.payload.values[k];
+        // })
+      }
+    });
 }
 
 profileLoad();
-
 </script>
 
 <template lang="pug">
@@ -102,7 +98,6 @@ div(class="box-container")
 </template>
 
 <style scoped>
-
 form {
   display: grid;
   grid-template-columns: 1fr 4fr;
@@ -113,5 +108,4 @@ form {
 .invalid {
   color: red;
 }
-
 </style>

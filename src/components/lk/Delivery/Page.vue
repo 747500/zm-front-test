@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 //import { createPopper } from '@popperjs/core';
 
 import DeliveryForm from './Form.vue';
@@ -18,14 +18,14 @@ const dto = ref({
 });
 
 function updateList() {
-    fetch('/api/lk/delivery', {
-      method: 'GET',
-      credentials: 'include',
+  fetch('/api/lk/delivery', {
+    method: 'GET',
+    credentials: 'include',
+  })
+    .then((response) => {
+      return response.json();
     })
-    .then(response => {
-      return response.json()
-    })
-    .then(data => {
+    .then((data) => {
       addressList.value = data.payload;
     });
 }
@@ -38,15 +38,14 @@ function createDeliveryAddress() {
       'content-type': 'application/json',
     },
     body: JSON.stringify(dto.value),
-  })
-  .then(() => {
+  }).then(() => {
     updateList();
-    Object.keys(dto.value).forEach(k => dto.value[k] = '');
+    Object.keys(dto.value).forEach((k) => (dto.value[k] = ''));
   });
 }
 
 function updateDeliveryAddress(id) {
-  const item = addressList.value.find(item => item.id === id);
+  const item = addressList.value.find((item) => item.id === id);
 
   fetch(`/api/lk/delivery/${id}`, {
     method: 'PUT',
@@ -55,8 +54,7 @@ function updateDeliveryAddress(id) {
       'content-type': 'application/json',
     },
     body: JSON.stringify(item),
-  })
-  .then(() => {
+  }).then(() => {
     updateList();
   });
 }
@@ -65,8 +63,7 @@ function deleteDeliveryAddress(id) {
   fetch(`/api/lk/delivery/${id}`, {
     method: 'DELETE',
     credentials: 'include',
-  })
-  .then(() => {
+  }).then(() => {
     updateList();
   });
 }
@@ -101,7 +98,6 @@ div(class="delivery-container box-container flex-container")
 </template>
 
 <style scoped>
-
 .delivery-container {
   align-items: flex-start;
 }

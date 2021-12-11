@@ -3,10 +3,10 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
 import { useRouter } from 'vue-router';
-import { shallowRef } from 'vue'
-import { useStore } from 'vuex'
+import { shallowRef } from 'vue';
+import { useStore } from 'vuex';
 
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
 
 import AuthRegister from './components/Auth/Register.vue';
 import AuthLogin from './components/Auth/Login.vue';
@@ -19,12 +19,11 @@ const store = useStore();
 
 fetch('/api/auth/whoami', {
   credentials: 'include',
-})
-.then(response => {
-  if (200 === response.status){
+}).then((response) => {
+  if (200 === response.status) {
     store.commit('login');
   }
-})
+});
 
 store.watch(
   (state, getters) => getters.isAuthorized,
@@ -33,11 +32,10 @@ store.watch(
     if (now) {
       router.push('/lk/profile');
     }
-  }
+  },
 );
 
 const logOrReg = shallowRef(AuthRegister);
-
 </script>
 
 <template lang="pug">
@@ -88,19 +86,19 @@ a {
 }
 
 a:hover {
-  color:crimson;
+  color: crimson;
 }
 
 input {
   border: 1px solid #555;
   border-radius: 3px;
-  padding: .32em;
+  padding: 0.32em;
 }
 
 button {
   border: 1px solid #555;
   border-radius: 3px;
-  padding: .32em .64em;
+  padding: 0.32em 0.64em;
 }
 
 input[readonly] {
@@ -117,7 +115,7 @@ input[readonly] {
 .login-options h3 a {
   display: block;
   text-align: center;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   /* flex-basis: 33%; */
 }
 
@@ -133,7 +131,7 @@ input[readonly] {
 .settings {
   padding: 1em;
   margin: 0 0 1em 0;
-  box-shadow: .32em .12em .4em #ccc, -.32em 0 .4em #ddd;
+  box-shadow: 0.32em 0.12em 0.4em #ccc, -0.32em 0 0.4em #ddd;
   background-color: #fff;
   align-items: baseline;
 }
@@ -146,12 +144,16 @@ input[readonly] {
 .app-menu {
   padding: 1em;
   margin: 1em 0 1em 0;
-  box-shadow: .32em .12em .4em #ccc, -.32em 0 .4em #ddd;
+  box-shadow: 0.32em 0.12em 0.4em #ccc, -0.32em 0 0.4em #ddd;
   background-color: #fff;
 }
 
 .hello-world {
-  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), center no-repeat url('./assets/logo.png');
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8)
+    ),
+    center no-repeat url('./assets/logo.png');
 }
 
 .flex-container {
@@ -165,7 +167,7 @@ input[readonly] {
   */
   padding: 1em;
   margin: 1em;
-  box-shadow: .32em .12em .4em #ccc, -.32em 0 .4em #ddd;
+  box-shadow: 0.32em 0.12em 0.4em #ccc, -0.32em 0 0.4em #ddd;
   background-color: #fff;
 }
 
@@ -189,28 +191,27 @@ pre.raw {
 
 form label {
   text-align: right;
-  padding: .18em;
+  padding: 0.18em;
 }
 
 .foreign-services {
   display: flex;
   justify-content: center;
-  margin-top: .72em;
-  padding-top: .72em;
+  margin-top: 0.72em;
+  padding-top: 0.72em;
   border-top: 1px dashed #ccc;
 }
 
 .foreign-services > a {
   display: block;
-  padding: .72em;
-  margin: 0 .72em;
+  padding: 0.72em;
+  margin: 0 0.72em;
   border: 1px solid #ccc;
-  border-radius: .24em;
+  border-radius: 0.24em;
   text-decoration: none;
 }
 
 .foreign-services > a:hover {
   background-color: lightsalmon;
 }
-
 </style>

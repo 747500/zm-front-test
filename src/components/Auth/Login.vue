@@ -1,6 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
 
 const store = useStore();
 
@@ -10,33 +10,39 @@ const authLoginDto = ref({
 });
 
 function authLoginSubmit(event) {
-
   fetch('/api/auth/login', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(authLoginDto.value),
     credentials: 'include',
-  })
-  .then(response => {
+  }).then((response) => {
     if (201 === response.status) {
       store.commit('login');
     }
-  })
+  });
 }
-
 </script>
 
 <template>
-
   <form @submit.prevent="authLoginSubmit">
     <div id="auth-login-fields">
       <label for="auth-login-email">E-mail</label>
-      <input id="auth-login-email" name="email" type="email" v-model="authLoginDto.email"/>
+      <input
+        id="auth-login-email"
+        v-model="authLoginDto.email"
+        name="email"
+        type="email"
+      />
 
       <label for="auth-login-password">Password</label>
-      <input id="auth-login-password" name="password" type="password" v-model="authLoginDto.password"/>
+      <input
+        id="auth-login-password"
+        v-model="authLoginDto.password"
+        name="password"
+        type="password"
+      />
 
       <label for="auth-login-submit">Submit form</label>
       <button id="auth-login-submit">POST /auth/login</button>
@@ -45,7 +51,6 @@ function authLoginSubmit(event) {
 </template>
 
 <style scoped>
-
 #auth-login-fields {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -53,5 +58,4 @@ function authLoginSubmit(event) {
   row-gap: 0.33em;
   align-items: baseline;
 }
-
 </style>

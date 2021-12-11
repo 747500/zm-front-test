@@ -1,15 +1,15 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 import { createStore } from 'vuex';
-import App from './App.vue'
-import { userProfile  } from './userProfile';
+import App from './App.vue';
+import { userProfile } from './userProfile';
 import { showRaw } from './showRaw';
 import router from './router';
 
 const store = createStore({
-	modules: {
+  modules: {
     userProfile,
     showRaw,
-	}
+  },
 });
 
-createApp(App).use(router).use(store).mount('#app')
+createApp(App).use(router).use(store).mount('#app');
