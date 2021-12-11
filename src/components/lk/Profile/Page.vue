@@ -16,7 +16,8 @@ function profileLoad() {
   })
   .then(async response => {
     if (200 === response.status) {
-      profileData.value = await response.json();
+      const data = await response.json();
+      profileData.value = data.payload;
     }
   })
 }
@@ -42,8 +43,6 @@ function profileUpdate() {
       profileValidation.value = {};
       return;
     }
-
-    console.log(data);
 
     if ('error' === data.status && 'Validation' === data.payload?.message) {
       profileValidation.value = data.payload.values;

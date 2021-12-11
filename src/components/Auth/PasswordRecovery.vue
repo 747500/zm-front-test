@@ -8,15 +8,10 @@ const lkLostPasswordDto = ref({
 const resultMessage = ref('');
 
 function requestPasswordRecovery() {
-  const s = `${window.location.protocol}//${window.location.host}/`;
-  console.log(s);
-  const url = new URL(s);
-  url.pathname = '/passwordRecovery';
-
-  console.log(url.toString());
+  const url = new URL('/passwordRecovery', window.location);
 
   fetch('/api/auth/password/recovery', {
-    method: 'PUT',
+    method: 'POST',
     credentials: 'include',
     headers: {
       'content-type': 'application/json'

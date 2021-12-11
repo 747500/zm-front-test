@@ -2,6 +2,7 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 
+import { useRouter } from 'vue-router';
 import { shallowRef } from 'vue'
 import { useStore } from 'vuex'
 
@@ -11,6 +12,8 @@ import AuthRegister from './components/Auth/Register.vue';
 import AuthLogin from './components/Auth/Login.vue';
 import AuthPasswordRecovery from './components/Auth/PasswordRecovery.vue';
 import AuthLogout from './components/Auth/Logout.vue';
+
+const router = useRouter();
 
 const store = useStore();
 
@@ -23,12 +26,15 @@ fetch('/api/auth/whoami', {
   }
 })
 
-// store.watch(
-//   (state, getters) => getters.isAuthorized,
-//   (now, was) => {
-//     console.log(`${was} >>> ${now}`);
-//   }
-// );
+store.watch(
+  (state, getters) => getters.isAuthorized,
+  (now, was) => {
+    //console.log(`${was} >>> ${now}`);
+    if (now) {
+      router.push('/lk/profile');
+    }
+  }
+);
 
 const logOrReg = shallowRef(AuthRegister);
 

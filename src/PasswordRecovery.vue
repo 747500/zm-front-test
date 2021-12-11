@@ -14,7 +14,7 @@ const dto = ref({
 const resultMessage = ref('');
 
 function setPassword() {
-  fetch('/api/auth/password/set', {
+  fetch('/api/auth/password/recovery', {
     method: 'PUT',
     credentials: 'include',
     headers: {
